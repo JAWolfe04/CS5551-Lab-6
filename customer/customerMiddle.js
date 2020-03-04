@@ -32,9 +32,11 @@ const addCustomer = (id, name, email) => {
 const getCustomer = (id) => {
     const customers = fetchCustomers();
 
-    const duplicateCustomer =  customers.filter((customer) => {
-        return customer;
+    const matchingCustomers =  customers.filter((customer) => {
+        return customer.id === id;
     });
+
+    return matchingCustomers[0];
 };
 
 const listCustomers = () => {
@@ -42,7 +44,15 @@ const listCustomers = () => {
 };
 
 const removeCustomer = (id) => {
+    const customers = fetchCustomers();
 
+    const filteredCustomers = customers.filter(customer => {
+        return customer.id !== id;
+    });
+
+    saveCustomers(filteredCustomers);
+
+    return filteredCustomers.length !== customers.length;
 };
 
 const logCustomer = (customer) => {

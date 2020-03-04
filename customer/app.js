@@ -49,7 +49,13 @@ if (command === 'add') {
         console.log("This Customer already exists");
     }
 } else if (command === 'get') {
+    const customer = middle.getCustomer(argv.id);
 
+    if(customer) {
+        middle.logCustomer(customer);
+    } else {
+        console.log('Customer not found')
+    }
 } else if (command === 'list') {
     const customers = middle.listCustomers();
 
@@ -57,7 +63,13 @@ if (command === 'add') {
         middle.logCustomer(customer);
     });
 } else if (command === 'remove') {
+    const removed = middle.removeCustomer(argv.id);
 
+    if(removed) {
+        console.log('Customer removed');
+    } else {
+        console.log('Unable to find customer');
+    }
 } else {
     console.log('command note recognized');
 };
