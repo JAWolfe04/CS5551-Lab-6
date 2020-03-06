@@ -1,5 +1,10 @@
 const fs =  require('fs');
 
+//-------------------------------------------------------------------------
+// fetchCustomers
+//
+// get all of the customer records from json
+//-------------------------------------------------------------------------
 const fetchCustomers = () => {
     try {
         const customerString = fs.readFileSync('customer.json');
@@ -10,10 +15,24 @@ const fetchCustomers = () => {
     }
 };
 
+//-------------------------------------------------------------------------
+// saveCustomers
+//
+// write all of the customer records to json
+//-------------------------------------------------------------------------
 const saveCustomers = (customers) => {
     fs.writeFileSync('customer.json',JSON.stringify(customers));
 };
 
+//-------------------------------------------------------------------------
+// addCustomer
+//
+// add single customer record, then save to json
+//
+// input:   id    -- Customer id, unique
+//          name  -- Customer name
+//          email -- Customer email address
+//-------------------------------------------------------------------------
 const addCustomer = (id, name, email) => {
     const customers = fetchCustomers();
     const customer = { id, name, email };
@@ -29,6 +48,13 @@ const addCustomer = (id, name, email) => {
     };
 };
 
+//-------------------------------------------------------------------------
+// getCustomer
+//
+// retrieve customer information formation for give id
+//
+// input:   id    -- Customer id being searched for
+//-------------------------------------------------------------------------
 const getCustomer = (id) => {
     const customers = fetchCustomers();
 
@@ -39,10 +65,22 @@ const getCustomer = (id) => {
     return matchingCustomers[0];
 };
 
+//-------------------------------------------------------------------------
+// listCustomers
+//
+// retrieve all of the customers stored in the json
+//-------------------------------------------------------------------------
 const listCustomers = () => {
     return fetchCustomers();
 };
 
+//-------------------------------------------------------------------------
+// removeCustomer
+//
+// remove single customer stored  the json
+//
+// input:   id    -- Customer id being searched for
+//-------------------------------------------------------------------------
 const removeCustomer = (id) => {
     const customers = fetchCustomers();
 
@@ -55,6 +93,13 @@ const removeCustomer = (id) => {
     return filteredCustomers.length !== customers.length;
 };
 
+//-------------------------------------------------------------------------
+// logCustomer
+//
+// output to console information about customer record
+//
+// input:   customer    -- Customer record being printed
+//-------------------------------------------------------------------------
 const logCustomer = (customer) => {
     console.log('----------------------------------------');
     console.log(`ID: ${customer.id}`);
